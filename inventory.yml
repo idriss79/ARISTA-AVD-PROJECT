@@ -7,7 +7,7 @@ all:
             DC1_SPINES:
               hosts:
                 spine1:
-                  ansible_host: 192.168.100.101 # IP de Management de votre Spine 1 dans EVE
+                  ansible_host: 192.168.100.110 # IP de Management de votre Spine 1 dans EVE
                 spine2:
                   ansible_host: 192.168.100.102
             DC1_LEAFS:
