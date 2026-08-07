@@ -32,4 +32,3 @@ jobs:
           ANSIBLE_HOST_KEY_CHECKING: "False"
         run: |
           ansible-playbook -i inventory.yml dc1_playbook.yml --extra-vars "ansible_ssh_pass=${{ secrets.AVD_PASSWORD }}"
-      
