@@ -25,14 +25,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install ansible-core
           ansible-galaxy collection install arista.avd
-          if [ -f ~/.ansible/collections/ansible_collections/arista/avd/requirements.txt ]; then
-            pip install -r ~/.ansible/collections/ansible_collections/arista/avd/requirements.txt
-          else
-            pip install pyavd
-          fi
+          pip install pyavd
 
       - name: "4. Exécuter le Playbook Arista AVD"
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"
         run: |
           ansible-playbook -i inventory.yml dc1_playbook.yml --extra-vars "ansible_ssh_pass=${{ secrets.AVD_PASSWORD }}"
+      
