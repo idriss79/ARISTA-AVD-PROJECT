@@ -1,0 +1,6 @@
+ansible_user: idriss  
+ansible_ssh_pass: arista
+ansible_connection: httpapi
+ansible_network_os: arista.eos.eos
+ansible_httpapi_use_ssl: true
+ansible_httpapi_validate_certs: false

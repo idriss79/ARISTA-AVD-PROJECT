@@ -1,0 +1,17 @@
+- name: Generer et deployer la configuration Arista AVD
+  hosts: DC1
+  gather_facts: false
+  tasks:
+    # Étape 1 : Générer les configurations EOS et la documentation du réseau
+    - name: Generer les configurations d'architectures (Facts)
+      import_role:
+        name: arista.avd.eos_designs
+
+    - name: Generer les fichiers de configuration finaux
+      import_role:
+        name: arista.avd.eos_cli_config_gen
+
+    # Étape 2 : Pousser les configurations générées sur les vEOS réels dans EVE-NG
+    - name: Deployer les configurations sur les commutateurs vEOS
+      import_role:
+        name: arista.avd.eos_config_deploy_eapi

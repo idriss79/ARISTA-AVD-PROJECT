@@ -1,0 +1,37 @@
+# Définition des types de nœuds
+type: l3ls-evpn
+
+# Configuration globale de la Fabric
+pod_name: DC1
+bgp_as: 65001 # ASN BGP de base (modèle eBGP ou iBGP géré par AVD)
+
+# Plans d'adressage IP automatiques pour les interconnexions P2P et les Loopbacks
+spine_mesh_as: 65000
+loopback_ipv4_pool: 192.168.255.0/24
+vtep_loopback_ipv4_pool: 192.168.254.0/24
+uplink_ipv4_pool: 172.16.255.0/24
+
+# Attribution des interfaces physiques dans EVE-NG
+# Exemple : Spine1 Ethernet1 est connecté à Leaf1 Ethernet1
+spine:
+  defaults:
+    platform: vEOS-lab
+  nodes:
+    spine1:
+      id: 1
+    spine2:
+      id: 2
+
+leaf:
+  defaults:
+    platform: vEOS-lab
+    spanning_tree_mode: mstp
+  nodes:
+    leaf1:
+      id: 11
+      uplink_switches: [spine1, spine2]
+      uplink_interfaces: [Ethernet1, Ethernet2] # Vers les Spines
+    leaf2:
+      id: 12
+      uplink_switches: [spine1, spine2]
+      uplink_interfaces: [Ethernet1, Ethernet2]

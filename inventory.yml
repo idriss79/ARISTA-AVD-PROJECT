@@ -1,0 +1,18 @@
+all:
+  children:
+    DC1:
+      children:
+        DC1_FABRIC:
+          children:
+            DC1_SPINES:
+              hosts:
+                spine1:
+                  ansible_host: 192.168.100.101 # IP de Management de votre Spine 1 dans EVE
+                spine2:
+                  ansible_host: 192.168.100.102
+            DC1_LEAFS:
+              hosts:
+                leaf1:
+                  ansible_host: 192.168.1.201 # IP de Management de votre Leaf 1 dans EVE
+                leaf2:
+                  ansible_host: 192.168.100.202
