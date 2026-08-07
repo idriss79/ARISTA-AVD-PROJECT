@@ -1,4 +1,4 @@
-name: "Arista AVD Deploy via Self-Hosted Runner"
+﻿name: "Arista AVD Deploy via Self-Hosted Runner"
 
 on:
   push:
