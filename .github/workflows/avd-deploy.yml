@@ -9,7 +9,7 @@ on:
 jobs:
   avd_deployment:
     name: "Générer et Déployer AVD"
-    runs-on: [self-hosted, windows]
+    runs-on: ubuntu-latest
 
     steps:
       - name: "1. Récupérer le code du dépôt Git"
