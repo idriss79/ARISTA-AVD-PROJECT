@@ -1,2 +1,4 @@
 # Configuration spécifique aux Leafs
 type: leaf
+loopback_ipv4_pool: 192.168.253.0/24
+vtep_loopback_ipv4_pool: 192.168.254.0/24
