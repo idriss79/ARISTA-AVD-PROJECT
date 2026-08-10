@@ -1,5 +1,5 @@
 - name: Generer et deployer la configuration Arista AVD
-  hosts: DC1
+  hosts: DC1_FABRIC
   gather_facts: false
   tasks:
     # Étape 1 : Générer les configurations EOS et la documentation du réseau
