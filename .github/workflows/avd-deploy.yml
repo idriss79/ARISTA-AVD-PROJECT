@@ -8,31 +8,30 @@ on:
 
 jobs:
   avd_deployment:
-    name: "Générer et Déployer AVD"
-    runs-on: ubuntu-latest
+    name: "Générer et Déployer AVD depuis le Runner Local"
+    # ⚠️ Obligatoire pour utiliser votre runner physique 192.168.100.60
+    runs-on: self-hosted 
 
     steps:
       - name: "1. Récupérer le code du dépôt Git"
         uses: actions/checkout@v4
 
-      - name: "2. Configurer Python"
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
+      - name: "2. Installer les prérequis système (si manquants sur le runner)"
+        run: |
+          sudo apt update && sudo apt install -y python3-pip python3-venv git
 
       - name: "3. Installer Ansible et les dépendances AVD"
-        shell: powershell # 👈 Indique au runner d'utiliser PowerShell pour ce bloc
         run: |
-          python -m venv venv
-          .\venv\Scripts\Activate.ps1
-          python -m pip install --upgrade pip
-          pip install ansible-core pyavd
+          python3 -m venv venv
+          source venv/bin/activate
+          python3 -m pip install --upgrade pip
+          pip install "pyavd[ansible]"
           ansible-galaxy collection install arista.avd
 
       - name: "4. Exécuter le Playbook Arista AVD"
-        shell: powershell # 👈 Indique au runner d'utiliser PowerShell pour ce bloc
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"
         run: |
-          .\venv\Scripts\Activate.ps1
-          ansible-playbook -i inventory.yml dc1_playbook.yml --extra-vars "ansible_ssh_pass=${{ secrets.AVD_PASSWORD }}"
+          source venv/bin/activate
+          # Exécution du playbook directement vers les IPs d'EVE-NG
+          ansible-playbook -i inventory.yml dc1_playbook.yml --extra-vars "ansible_password=${{ secrets.AVD_PASSWORD }}"
