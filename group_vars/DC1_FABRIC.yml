@@ -1,5 +1,5 @@
-# Définition des types de nœuds
-type: l3ls-evpn
+#Définition des types de nœuds
+#type: l3ls-evpn
 
 # Configuration globale de la Fabric
 pod_name: DC1
