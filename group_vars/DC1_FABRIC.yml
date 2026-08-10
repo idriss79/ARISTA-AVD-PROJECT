@@ -12,26 +12,27 @@ vtep_loopback_ipv4_pool: 192.168.254.0/24
 uplink_ipv4_pool: 172.16.255.0/24
 
 # Attribution des interfaces physiques dans EVE-NG
-# Exemple : Spine1 Ethernet1 est connecté à Leaf1 Ethernet1
 spine:
   defaults:
     platform: vEOS-lab
+  # 🔧 Modification : Utilisation de tirets '-' pour créer une Liste
   nodes:
-    spine1:
+    - name: spine1
       id: 1
-    spine2:
+    - name: spine2
       id: 2
 
 leaf:
   defaults:
     platform: vEOS-lab
     spanning_tree_mode: mstp
+  # 🔧 Modification : Utilisation de tirets '-' pour créer une Liste
   nodes:
-    leaf1:
+    - name: leaf1
       id: 11
       uplink_switches: [spine1, spine2]
       uplink_interfaces: [Ethernet1, Ethernet2] # Vers les Spines
-    leaf2:
+    - name: leaf2
       id: 12
       uplink_switches: [spine1, spine2]
       uplink_interfaces: [Ethernet1, Ethernet2]
