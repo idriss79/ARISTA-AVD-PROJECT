@@ -39,3 +39,4 @@ leaf:
       id: 12
       uplink_switches: [spine1, spine2]
       uplink_interfaces: [Ethernet1, Ethernet2]
+      uplink_switch_interfaces: [Ethernet2, Ethernet2]
