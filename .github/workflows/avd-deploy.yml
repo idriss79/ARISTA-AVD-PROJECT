@@ -15,21 +15,11 @@ jobs:
       - name: "1. Récupérer le code du dépôt Git"
         uses: actions/checkout@v4
 
-      - name: "2. Exécuter le Playbook à distance sur la VM Ansible"
-        # Cette action officielle se connecte en SSH de votre Runner Windows vers votre VM Linux
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: "192.168.100.121" # IP de votre VM Ansible VMware
-          username: "idriss" # Mettez l'utilisateur de votre VM Linux
-          password: ${{ secrets.VM_ANSIBLE_PASSWORD }} # Ajoutez le mot de passe de la VM dans les secrets GitHub
-          port: 22
-          script: |
-            # Se déplacer dans le dossier du projet sur la VM Linux
-            cd ~/avd-project
-            
-            # Récupérer les dernières modifications du dépôt Git directement sur la VM (optionnel mais recommandé)
-            git pull origin main || true
-            
-            # Activer l'environnement virtuel et lancer le déploiement vers EVE-NG
-            source venv/bin/activate
-            ansible-playbook -i inventory.yml dc1_playbook.yml --extra-vars "ansible_password=${{ secrets.AVD_PASSWORD }}"
+      - name: "2. Exécuter le Playbook via Clé SSH"
+        shell: powershell
+        run: |
+          # Chaîne de commandes envoyée à la VM Linux : navigation, activation venv et exécution d'Ansible
+          $remoteCmd = "cd ~/avd-project && git pull origin main || true && source venv/bin/activate && ansible-playbook -i inventory.yml dc1_playbook.yml --extra-vars 'ansible_password=${{ secrets.AVD_PASSWORD }}'"
+          
+          # Exécution de la commande à distance (StrictHostKeyChecking=no évite le prompt de validation d'empreinte)
+          ssh -o StrictHostKeyChecking=no idrisshousseinofleh@192.168.100.121 "$remoteCmd"
