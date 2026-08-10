@@ -31,7 +31,10 @@ leaf:
     - name: leaf1
       id: 11
       uplink_switches: [spine1, spine2]
-      uplink_interfaces: [Ethernet1, Ethernet2] # Vers les Spines
+      uplink_interfaces: [Ethernet1, Ethernet2] # Interfaces physiques sur LEAF1
+      # 🔧 AJOUT : Interfaces correspondantes sur SPINE1 et SPINE2
+      # Exemple : Ethernet1 de LEAF1 va sur Ethernet1 de SPINE1, et Ethernet2 va sur Ethernet1 de SPINE2
+      uplink_switch_interfaces: [Ethernet1, Ethernet1]
     - name: leaf2
       id: 12
       uplink_switches: [spine1, spine2]
