@@ -7,7 +7,8 @@ fabric_name: DC1_FABRIC # 👈 Résout l'erreur de validation 'fabric_name'
 # Plans d'adressage IP automatiques pour les interconnexions P2P et les Loopbacks
 spine_mesh_as: 65000
 fabric_ip_allocations:
-  
+  loopback_ipv4_pool: 192.168.255.0/24
+  vtep_loopback_ipv4_pool: 192.168.254.0/24
   uplink_ipv4_pool: 172.16.255.0/24
 
 # Attribution des interfaces physiques dans EVE-NG

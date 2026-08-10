@@ -1,3 +1,2 @@
 # Configuration spécifique aux Spines
 type: spine
-loopback_ipv4_pool: 192.168.255.0/24
