@@ -22,4 +22,4 @@ jobs:
           $remoteCmd = "cd ~/avd-project && git pull origin main || true && source venv/bin/activate && ansible-playbook -i inventory.yml dc1_playbook.yml --extra-vars 'ansible_password=${{ secrets.AVD_PASSWORD }}'"
           
           # Exécution de la commande à distance (StrictHostKeyChecking=no évite le prompt de validation d'empreinte)
-          ssh -o StrictHostKeyChecking=no idrisshousseinofleh@192.168.100.121 "$remoteCmd"
+          ssh -o StrictHostKeyChecking=no idriss@192.168.100.121 "$remoteCmd"
