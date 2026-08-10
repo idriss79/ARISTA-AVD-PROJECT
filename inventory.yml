@@ -20,8 +20,7 @@ all:
           
           # ⚙️ Variables globales indispensables pour Arista AVD
           vars:
-            fabric_name: DC1_FABRIC # 👈 Résout l'erreur de validation 'fabric_name'
-            
+                     
             # Paramètres de connexion eAPI recommandés pour EVE-NG
             ansible_user: idriss
             ansible_connection: ansible.netcommon.httpapi
