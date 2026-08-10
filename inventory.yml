@@ -3,16 +3,29 @@ all:
     DC1:
       children:
         DC1_FABRIC:
+          # Définition des groupes de switches de la Fabric
           children:
             DC1_SPINES:
               hosts:
                 spine1:
-                  ansible_host: 192.168.100.101 # IP de Management de votre Spine 1 dans EVE
+                  ansible_host: 192.168.100.101
                 spine2:
                   ansible_host: 192.168.100.102
             DC1_LEAFS:
               hosts:
                 leaf1:
-                  ansible_host: 192.168.1.201 # IP de Management de votre Leaf 1 dans EVE
+                  ansible_host: 192.168.100.201 #
                 leaf2:
                   ansible_host: 192.168.100.202
+          
+          # ⚙️ Variables globales indispensables pour Arista AVD
+          vars:
+            fabric_name: DC1_FABRIC # 👈 Résout l'erreur de validation 'fabric_name'
+            
+            # Paramètres de connexion eAPI recommandés pour EVE-NG
+            ansible_user: idriss
+            ansible_connection: ansible.netcommon.httpapi
+            ansible_network_os: arista.eos.eos
+            ansible_httpapi_use_ssl: true
+            ansible_httpapi_validate_certs: false
+            ansible_httpapi_port: 443
